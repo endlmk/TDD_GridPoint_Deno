@@ -14,4 +14,7 @@ export class GridPoint {
     getNotation(): string {
         return "(" + this.x.toString() + ", " + this.y.toString() + ")";
     }
+    hasSameCoordinatesWith(cmp: GridPoint): boolean {
+        return this.x == cmp.getX() && this.y == cmp.getY();
+    }
 }
