@@ -17,4 +17,8 @@ export class GridPoint {
     hasSameCoordinatesWith(cmp: GridPoint): boolean {
         return this.x == cmp.getX() && this.y == cmp.getY();
     }
+    isNeighborOf(cmp: GridPoint): boolean {
+        return (Math.abs(this.x - cmp.getX()) == 1 && this.y == cmp.getY()) 
+            || (Math.abs(this.y - cmp.getY()) == 1 && this.x == cmp.getX());
+    }
 }
