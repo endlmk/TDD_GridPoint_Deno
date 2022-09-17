@@ -22,3 +22,16 @@ export class GridPoint {
             || (Math.abs(this.y - cmp.getY()) == 1 && this.x == cmp.getX());
     }
 }
+
+export class GridPoints {
+    readonly p1: GridPoint;
+    readonly p2: GridPoint;
+    constructor(p1: GridPoint, p2: GridPoint) {
+        this.p1 = p1;
+        this.p2 = p2;
+    }
+    containsPoint(cmp: GridPoint): boolean {
+        return this.p1.hasSameCoordinatesWith(cmp) 
+            || this.p2.hasSameCoordinatesWith(cmp);
+    }
+}
