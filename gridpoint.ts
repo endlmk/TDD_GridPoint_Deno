@@ -34,4 +34,7 @@ export class GridPoints {
         return this.p1.hasSameCoordinatesWith(cmp) 
             || this.p2.hasSameCoordinatesWith(cmp);
     }
+    isConnected(): boolean {
+        return this.p1.isNeighborOf(this.p2);
+    }
 }

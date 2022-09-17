@@ -25,7 +25,14 @@ Deno.test("隣り合う格子を判定できる", () => {
 });
 
 Deno.test("格子点集合が指定した格子点を含むか判定できる", () => {
-    const points = new GridPoints(new GridPoint(4, 7), new GridPoint(5,8));
+    const points = new GridPoints(new GridPoint(4, 7), new GridPoint(5, 8));
     assert(points.containsPoint(new GridPoint(4, 7)));
     assertFalse(points.containsPoint(new GridPoint(5, 7)));
+});
+
+Deno.test("格子点集合が連結しているか判定できる", () => {
+    const points1 = new GridPoints(new GridPoint(4, 7), new GridPoint(5, 7));
+    assert(points1.isConnected());
+    const points2 = new GridPoints(new GridPoint(4, 7), new GridPoint(5, 8));
+    assertFalse(points2.isConnected());    
 });
