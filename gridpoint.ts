@@ -24,17 +24,33 @@ export class GridPoint {
 }
 
 export class GridPoints {
-    readonly p1: GridPoint;
-    readonly p2: GridPoint;
-    constructor(p1: GridPoint, p2: GridPoint) {
-        this.p1 = p1;
-        this.p2 = p2;
+    readonly p: GridPoint[];
+    constructor(...p: GridPoint[]) {
+        if(p.length < 2 || 3 < p.length)
+        {
+            throw Error("Unsupported number of points.");
+        }
+        if(p[0].hasSameCoordinatesWith(p[1])) {
+            throw Error("Same GridPoint exists.");
+        }
+        this.p= p;
     }
     containsPoint(cmp: GridPoint): boolean {
-        return this.p1.hasSameCoordinatesWith(cmp) 
-            || this.p2.hasSameCoordinatesWith(cmp);
+        return this.p.some((p) => { 
+            return p.hasSameCoordinatesWith(cmp);
+        });
     }
     isConnected(): boolean {
-        return this.p1.isNeighborOf(this.p2);
+        if(this.p.length == 2) {
+            return this.p[0].isNeighborOf(this.p[1]);
+        }
+        else {
+            return (this.p[0].isNeighborOf(this.p[1]) && this.p[1].isNeighborOf(this.p[2]))
+                || (this.p[1].isNeighborOf(this.p[2]) && this.p[2].isNeighborOf(this.p[0]))
+                || (this.p[2].isNeighborOf(this.p[0]) && this.p[0].isNeighborOf(this.p[1]));
+        }
+    }
+    count(): number {
+        return this.p.length;
     }
 }
